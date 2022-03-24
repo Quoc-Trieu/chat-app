@@ -2,7 +2,7 @@ import React from "react";
 import useFirestore from '../Hooks/useFirestore'
 import { AuthContext } from './AuthProvider'
 
-const AppContext = React.createContext()
+const AppContext = React.createContext() //tạo context
 
 const AppProvider = ({children}) => {
 
@@ -10,7 +10,6 @@ const AppProvider = ({children}) => {
     const [isInviteMemberVisible, setIsInviteMemberVisible] = React.useState(false)
     const [selectedRoomId, setSelectedRoomId] = React.useState('')
     const { uid } = React.useContext(AuthContext)   
-    
     const roomsCondition = React.useMemo(()=>{
         return {
             fielName: 'members',
@@ -20,7 +19,6 @@ const AppProvider = ({children}) => {
     },[uid])
     // kiểm tra trong fielname rooms xem room nào có chứa member là uid hiện thì trả về
     const rooms = useFirestore('rooms',roomsCondition) 
-    console.log(uid);
     console.log(rooms);
     // tìm kiếm room trong list rooms có id = selectedRoomId và callback sẽ đc gọi khi dependencies rooms và selectedRoomId thay đổi,
     // và giá trị bên tỏng callback cũng đc thay đổi để phù hợp với room hiện tại
@@ -28,7 +26,6 @@ const AppProvider = ({children}) => {
         () => rooms.find(room => room.id === selectedRoomId ) || {},
         [rooms,selectedRoomId]
     );
-
 
     const uersCondition = React.useMemo(()=>{
         return {

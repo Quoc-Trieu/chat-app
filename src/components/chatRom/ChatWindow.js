@@ -107,7 +107,7 @@ const ChatWindow = () => {
         if(seconds){
             formatDate = formatRelative(new Date(seconds * 1000),new Date())
 
-            formatDate = formatDate.charAt(0).toUpperCase() + formatDate.slice(1)
+            formatDate = formatDate.charAt(0).toUpperCase() + formatDate.slice(1) 
         }
         return formatDate
     }
@@ -136,7 +136,13 @@ const ChatWindow = () => {
         <ContentStyled> 
             <MessageListStyled>
                 {messages.map(mes => (
-                    <Messages key={mes.id} text={mes.inputValue} displayName={mes.displayName} photoURL={mes.photoURL} createdAt={formatDate(mes.createdAt)} />
+                    <Messages 
+                        key={mes.id} 
+                        text={mes.inputValue} 
+                        displayName={mes.displayName} 
+                        photoURL={mes.photoURL} 
+                        createdAt={formatDate(mes.createdAt?.seconds)} 
+                    />
                 ))}
             </MessageListStyled>
             <FormStyled form={form}>
